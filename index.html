@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Para Minha Amada</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS GERAL */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #121212; /* Fundo escuro Spotify */
+            color: #FFFFFF;
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* PLAYER ESTILO SPOTIFY */
+        .spotify-player {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+            background: linear-gradient(180deg, #282828 0%, #121212 100%);
+            text-align: center;
+        }
+
+        .album-cover {
+            width: 80vw;
+            height: 80vw;
+            max-width: 300px;
+            max-height: 300px;
+            border-radius: 8px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+            /* --- COLOQUE SUA FOTO DE CAPA AQUI --- */
+            background-image: url('capa.jpg'); 
+            background-size: cover;
+            background-position: center;
+            margin-bottom: 25px;
+        }
+
+        .track-info .track-name {
+            font-size: 20px;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .track-info .artist-name {
+            font-size: 14px;
+            color: #B3B3B3;
+            margin: 5px 0 20px 0;
+        }
+
+        /* Controles customizados básicos */
+        .controls {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        #play-pause-btn {
+            background-color: #1DB954; /* Verde Spotify */
+            color: black;
+            border: none;
+            border-radius: 50%;
+            width: 56px;
+            height: 56px;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* CONTADOR */
+        .counter-section {
+            padding: 30px 20px;
+            text-align: center;
+            background-color: #181818;
+            border-radius: 15px;
+            margin: 20px;
+        }
+
+        .counter-title {
+            font-size: 14px;
+            text-transform: uppercase;
+            color: #B3B3B3;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        #counter {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1DB954;
+        }
+
+        #counter span {
+            font-size: 16px;
+            color: #FFFFFF;
+            font-weight: 400;
+            margin-right: 5px;
+        }
+
+        /* TEXTO DE AMOR */
+        .love-text-section {
+            padding: 30px 25px;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        .love-text-section p {
+            font-size: 16px;
+            color: #E0E0E0;
+        }
+
+        /* LINHA DO TEMPO */
+        .timeline-section {
+            padding: 20px;
+            margin-bottom: 40px;
+        }
+
+        .timeline-title {
+            font-size: 22px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background-color: #282828;
+            top: 0;
+            bottom: 0;
+            left: 20px; /* Alinhado à esquerda no celular */
+            margin-left: -1px;
+        }
+
+        .timeline-container {
+            padding: 10px 0 10px 40px; /* Espaço para a linha */
+            position: relative;
+            width: auto;
+        }
+
+        .timeline-container::after {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            left: 14px;
+            background-color: #1DB954;
+            border: 2px solid #121212;
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .content {
+            background-color: #282828;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .content h3 {
+            margin: 0 0 5px 0;
+            font-size: 16px;
+            color: #1DB954;
+        }
+
+        .content p {
+            margin: 0 0 10px 0;
+            font-size: 14px;
+            color: #B3B3B3;
+        }
+
+        .content img {
+            width: 100%;
+            border-radius: 4px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <section class="spotify-player">
+        <div class="album-cover"></div>
+        <div class="track-info">
+            <p class="track-name">Vida Inteira</p>
+            <p class="artist-name">Banda do PA</p>
+        </div>
+        <div class="controls">
+            <button id="play-pause-btn">▶</button>
+        </div>
+        <audio id="myAudio" src="nossamusica.mp3" preload="metadata"></audio>
+    </section>
+
+    <section class="counter-section">
+        <p class="counter-title">Estamos juntos há</p>
+        <div id="counter">Carregando...</div>
+    </section>
+
+    <section class="love-text-section">
+        <p>Meu amor, criei esse cantinho pra gente lembrar o quanto nossa história é especial. Cada dia ao seu lado é um presente. Te amo!</p>
+    </section>
+
+<style>
+    /* Estilo para o Checklist */
+    .checklist-section {
+        margin: 20px;
+        padding: 20px;
+        background-color: #181818;
+        border-radius: 15px;
+    }
+    .check-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+        font-size: 14px;
+    }
+    .check-item input {
+        margin-right: 12px;
+        accent-color: #1DB954;
+    }
+</style>
+
+<section class="checklist-section">
+    <div class="check-item"><input type="checkbox" checked disabled> 1 Meses: O início de tudo</div>
+    <div class="check-item"><input type="checkbox" checked disabled> 2 Meses: Cada dia melhor</div>
+    <div class="check-item"><input type="checkbox" checked disabled> 3 Meses: Nosso primeiro trimestre</div>
+    <div class="check-item"><input type="checkbox"> 6 Meses: Meio ano de nós</div>
+</section>
+
+    <section class="timeline-section">
+        <h2 class="timeline-title">Nossos Melhores Momentos</h2>
+        <div class="timeline">
+            
+            <div class="timeline-container">
+                <div class="content">
+                    <h3>Dia do aniversario da amada</h3>
+                    <p style="font-size: 12px;">30/11/2025</p>
+                    <img src="foto1.jpg" alt="Momento 1">
+                </div>
+            </div>
+
+            <div class="timeline-container">
+                <div class="content">
+                    <h3>Dia do pedido de namoro</h3>
+                    <p style="font-size: 12px;">06/12/2025</p>
+                    <img src="foto2.jpg" alt="Momento 2">
+                </div>
+            </div>
+
+            <div class="timeline-container">
+                <div class="content">
+                    <h3>Primeira vez no sítio</h3>
+                    <p style="font-size: 12px;">--/12/2024</p>
+                    <img src="foto3.jpg" alt="Momento 3">
+                </div>
+            </div>
+
+            <div class="timeline-container">
+                <div class="content">
+                    <h3>Estadio do América</h3>
+                    <p style="font-size: 12px;">--/01/2026</p>
+                    <img src="foto4.jpg" alt="Momento 4">
+                </div>
+            </div>
+            
+            <div class="timeline-container">
+                <div class="content">
+                    <h3>Saindo combinando</h3>
+                    <p style="font-size: 12px;">--/01/2026</p>
+                    <img src="foto5.jpg" alt="Momento 5">
+                </div>
+            </div>
+
+            <div class="timeline-container">
+                <div class="content">
+                    <h3>O futuro</h3>
+                    <p style="font-size: 12px;">--/--/----</p>
+                    <img src="foto6.jpg" alt="Momento 6">
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <script>
+        // --- CONFIGURAÇÃO ---
+        // COLOQUE A DATA DO INÍCIO DO NAMORO AQUI (Ano, Mês-1, Dia)
+        // Nota: O mês começa em 0 (Janeiro=0, Fevereiro=1, etc.)
+        const dataInicio = new Date(2025, 11, 6); 
+
+        // SCRIPT DO PLAYER
+        const audio = document.getElementById('myAudio');
+        const playBtn = document.getElementById('play-pause-btn');
+
+        playBtn.addEventListener('click', function() {
+            if (audio.paused) {
+                audio.play();
+                playBtn.innerText = "⏸"; // Ícone de Pause
+            } else {
+                audio.pause();
+                playBtn.innerText = "▶"; // Ícone de Play
+            }
+        });
+
+        // SCRIPT DO CONTADOR
+        function atualizarContador() {
+            const agora = new Date();
+            const diferenca = agora - dataInicio;
+
+            if (diferenca < 0) {
+                document.getElementById('counter').innerText = "O futuro nos espera!";
+                return;
+            }
+
+            const segundos = Math.floor((diferenca / 1000) % 60);
+            const minutos = Math.floor((diferenca / 1000 / 60) % 60);
+            const horas = Math.floor((diferenca / (1000 * 60 * 60)) % 24);
+            const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
+
+            document.getElementById('counter').innerHTML = 
+                `${dias}<span>dias</span> ${horas}<span>h</span> ${minutos}<span>m</span> ${segundos}<span>s</span>`;
+        }
+
+        // Atualiza a cada segundo
+        setInterval(atualizarContador, 1000);
+        atualizarContador(); // Executa uma vez para não esperar 1s
+    </script>
+</body>
+</html>
